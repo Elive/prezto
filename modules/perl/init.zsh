@@ -16,7 +16,7 @@ fi
 
 if [[ "$OSTYPE" == darwin* ]]; then
   # Perl is slow; cache its output.
-  cache_file="${0:h}/cache.zsh"
+  cache_file="${HOME}/.cache/perl.cache.zsh"
   perl_path="$HOME/Library/Perl/5.12"
 
   if [[ -f "$perl_path/lib/perl5/local/lib.pm" ]]; then
