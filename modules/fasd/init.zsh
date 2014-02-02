@@ -18,7 +18,7 @@ fi
 # Initialization
 #
 
-cache_file="${HOME}/.cache/fasd.cache.zsh"
+cache_file="${HOME}/.cache/zsh/fasd.cache.zsh"
 if [[ "${commands[fasd]}" -nt "$cache_file" || ! -s "$cache_file"  ]]; then
   # Set the base init arguments.
   init_args=(zsh-hook)
