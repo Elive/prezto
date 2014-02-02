@@ -40,7 +40,6 @@ zstyle ':prezto:load' pmodule \
   'tmux' \
   'prompt'
 
-# TODO: depencies: fasd, tmux, git
 
 #
 # Editor
@@ -153,5 +152,4 @@ zstyle ':prezto:module:terminal:tab-title' format '%s'
 # Auto start a session when Zsh is launched in a SSH connection.
 zstyle ':prezto:module:tmux:auto-start' remote 'yes'
 
-# TODO: if ssh, tmuxl to show the available sessions and explain how to attach
 
