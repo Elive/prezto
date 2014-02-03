@@ -55,25 +55,25 @@ function prompt_sorin_setup {
   # Set git-info parameters.
   zstyle ':prezto:module:git:info' verbose 'yes'
   zstyle ':prezto:module:git:info:action' format ':%%B%F{yellow}%s%f%%b'
-  zstyle ':prezto:module:git:info:added' format ' %%B%F{green}✚%f%%b'
-  zstyle ':prezto:module:git:info:ahead' format ' %%B%F{yellow}⬆%f%%b'
-  zstyle ':prezto:module:git:info:behind' format ' %%B%F{yellow}⬇%f%%b'
+  zstyle ':prezto:module:git:info:added' format ' %%B%F{green}added%f%%b'
+  zstyle ':prezto:module:git:info:ahead' format ' %%B%F{yellow}ahead%f%%b'
+  zstyle ':prezto:module:git:info:behind' format ' %%B%F{yellow}behind%f%%b'
   zstyle ':prezto:module:git:info:branch' format ':%F{green}%b%f'
   zstyle ':prezto:module:git:info:commit' format ':%F{green}%.7c%f'
-  zstyle ':prezto:module:git:info:deleted' format ' %%B%F{red}✖%f%%b'
-  zstyle ':prezto:module:git:info:modified' format ' %%B%F{blue}✱%f%%b'
+  zstyle ':prezto:module:git:info:deleted' format ' %%B%F{red}deleted%f%%b'
+  zstyle ':prezto:module:git:info:modified' format ' %%B%F{blue}modified%f%%b'
   zstyle ':prezto:module:git:info:position' format ':%F{red}%p%f'
-  zstyle ':prezto:module:git:info:renamed' format ' %%B%F{magenta}➜%f%%b'
-  zstyle ':prezto:module:git:info:stashed' format ' %%B%F{cyan}✭%f%%b'
-  zstyle ':prezto:module:git:info:unmerged' format ' %%B%F{yellow}═%f%%b'
-  zstyle ':prezto:module:git:info:untracked' format ' %%B%F{white}◼%f%%b'
+  zstyle ':prezto:module:git:info:renamed' format ' %%B%F{magenta}renamed%f%%b'
+  zstyle ':prezto:module:git:info:stashed' format ' %%B%F{cyan}stashed%f%%b'
+  zstyle ':prezto:module:git:info:unmerged' format ' %%B%F{yellow}unmerged%f%%b'
+  zstyle ':prezto:module:git:info:untracked' format ' %%B%F{white}untracked%f%%b'
   zstyle ':prezto:module:git:info:keys' format \
     'prompt' ' %F{blue}git%f$(coalesce "%b" "%p" "%c")%s' \
     'rprompt' '%A%B%S%a%d%m%r%U%u'
 
   # Define prompts.
   PROMPT='%F{cyan}${_prompt_sorin_pwd}%f${git_info:+${(e)git_info[prompt]}}%(!. %B%F{red}#%f%b.)${editor_info[keymap]} '
-  RPROMPT='${editor_info[overwrite]}%(?:: %F{red}⏎%f)${VIM:+" %B%F{green}V%f%b"}${git_info[rprompt]}'
+  RPROMPT='${editor_info[overwrite]}%(?:: %F{red}%?%f)${VIM:+" %B%F{green}V%f%b"}${git_info[rprompt]}'
   SPROMPT='zsh: correct %F{red}%R%f to %F{green}%r%f [nyae]? '
 }
 
