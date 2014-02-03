@@ -28,7 +28,6 @@ zstyle ':prezto:load' pmodule \
   'environment' \
   'terminal' \
   'editor' \
-  'per-directory-history' \
   'history' \
   'directory' \
   'spectrum' \
@@ -37,11 +36,15 @@ zstyle ':prezto:load' pmodule \
   'fasd' \
   'git' \
   'syntax-highlighting' \
-  'history-substring-search' \
   'terminal' \
   'tmux' \
   'prompt'
 
+
+# These ones where tried in Elive but we where not very convinced about them
+# is up to you to see if you really want them or not:
+  #'per-directory-history' \
+  #'history-substring-search' \
 
 #
 # Editor
