@@ -24,7 +24,6 @@ zstyle ':prezto:*:*' color 'yes'
 # Set the Prezto modules to load (browse modules).
 # The order matters.
 zstyle ':prezto:load' pmodule \
-  'last-working-dir' \
   'environment' \
   'terminal' \
   'editor' \
@@ -36,6 +35,7 @@ zstyle ':prezto:load' pmodule \
   'fasd' \
   'git' \
   'syntax-highlighting' \
+  'history-substring-search' \
   'terminal' \
   'tmux' \
   'prompt'
@@ -44,7 +44,7 @@ zstyle ':prezto:load' pmodule \
 # These ones where tried in Elive but we where not very convinced about them
 # is up to you to see if you really want them or not:
   #'per-directory-history' \
-  #'history-substring-search' \
+  #'last-working-dir' \
 
 #
 # Editor
