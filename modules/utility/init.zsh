@@ -134,12 +134,12 @@ fi
 alias df='df -k'
 alias du='du -k'
 
-if (( $+commands[htop] )); then
-  alias top=htop
-else
-  alias topc='top -o cpu'
-  alias topm='top -o vsize'
-fi
+#if (( $+commands[htop] )); then
+  #alias top=htop
+#else
+  #alias topc='top -o cpu'
+  #alias topm='top -o vsize'
+#fi
 
 # Miscellaneous
 
