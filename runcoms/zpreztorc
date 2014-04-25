@@ -33,7 +33,6 @@ zstyle ':prezto:load' pmodule \
   'utility' \
   'completion' \
   'fasd' \
-  'git' \
   'syntax-highlighting' \
   'history-substring-search' \
   'terminal' \
