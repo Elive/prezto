@@ -186,8 +186,8 @@ function psu {
   ps -U "${1:-$USER}" -o 'pid,%cpu,%mem,command' "${(@)argv[2,-1]}"
 }
 
-# Finds filenames in actual directory, maintained for compatibility
-function buscar {
-  find . -iname '*'$@'*'
-}
+# Finds filenames in actual directory, maintained for compatibility, moved to an executable file
+#function buscar {
+  #find . -iname '*'$@'*'
+#}
 
