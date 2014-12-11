@@ -78,7 +78,7 @@ fi
     'rprompt' '%A%B%S%a%d%m%r%U%u'
 
   # Define prompts.
-  PROMPT='%F{cyan}${_prompt_sorin_username}%F{cyan}${_prompt_sorin_pwd}%f${git_info:+${(e)git_info[prompt]}}%(!. %B%F{red}#%f%b.)${editor_info[keymap]} '
+  PROMPT='${_prompt_sorin_username}%F{cyan}${_prompt_sorin_pwd}%f${git_info:+${(e)git_info[prompt]}}%(!. %B%F{red}#%f%b.)${editor_info[keymap]} '
   RPROMPT='${editor_info[overwrite]}%(?:: %F{red}%?%f)${VIM:+" %B%F{green}V%f%b"}${git_info[rprompt]}'
   SPROMPT='zsh: correct %F{red}%R%f to %F{green}%r%f [nyae]? '
 }
@@ -94,8 +94,13 @@ if [[ -s /etc/elive-version ]] ; then
                 # add a : so that you can hilight and copypaste more easly the full address
                 _prompt_sorin_username="%F{cyan}${USER}%F{white}@%F{green}$(hostname)%F{white}:"
             else
-                # add a space too, to show it better
-                _prompt_sorin_username="$USER "
+                if [[ "$USER" = "root" ]] ; then
+                    # root is always red, important to see that add a space too, to show it better
+                    _prompt_sorin_username="%F{red}$USER "
+                else
+                    # add a space too, to show it better
+                    _prompt_sorin_username="%F{cyan}$USER "
+                fi
             fi
         else
             unset _prompt_sorin_username
