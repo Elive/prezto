@@ -92,7 +92,7 @@ if [[ -s /etc/elive-version ]] ; then
         if [[ "$_prompt_sorin_username" != "$USER" ]] ; then
             if [[ -n "$SSH_CLIENT" ]] ; then
                 # add a : so that you can hilight and copypaste more easly the full address
-                _prompt_sorin_username="%F{cyan}${USER}%F{white}@%F{yellow}$(hostname)%F{white}:"
+                _prompt_sorin_username="%F{cyan}${USER}%F{white}@%F{green}$(hostname)%F{white}:"
             else
                 # add a space too, to show it better
                 _prompt_sorin_username="$USER "
