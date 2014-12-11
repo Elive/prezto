@@ -82,6 +82,8 @@ fi
   RPROMPT='${editor_info[overwrite]}%(?:: %F{red}%?%f)${VIM:+" %B%F{green}V%f%b"}${git_info[rprompt]}'
   SPROMPT='zsh: correct %F{red}%R%f to %F{green}%r%f [nyae]? '
 }
+
+
 # show username if is not our default username
 if [[ -s /etc/elive-version ]] ; then
     # temporal variable to store the data
@@ -90,9 +92,13 @@ if [[ -s /etc/elive-version ]] ; then
     if [[ -n "$_prompt_sorin_username" ]] ; then
         # append username to prompt if we are not our own username
         if [[ "$_prompt_sorin_username" != "$USER" ]] ; then
-            if [[ -n "$SSH_CLIENT" ]] ; then
-                # add a : so that you can hilight and copypaste more easly the full address
-                _prompt_sorin_username="%F{cyan}${USER}%F{white}@%F{green}$(hostname)%F{white}:"
+            if [[ -n "$SSH_CLIENT" ]] || [[ "$TERM" = "screen-256color" ]] ; then
+                if [[ "$USER" = "root" ]] ; then
+                    # add a : so that you can hilight and copypaste more easly the full address
+                    _prompt_sorin_username="%F{red}${USER}%F{white}@%F{green}$(hostname)%F{white}:"
+                else
+                    _prompt_sorin_username="%F{cyan}${USER}%F{white}@%F{green}$(hostname)%F{white}:"
+                fi
             else
                 if [[ "$USER" = "root" ]] ; then
                     # root is always red, important to see that add a space too, to show it better
@@ -109,5 +115,6 @@ if [[ -s /etc/elive-version ]] ; then
         unset _prompt_sorin_username
     fi
 fi
+
 
 prompt_sorin_setup "$@"
