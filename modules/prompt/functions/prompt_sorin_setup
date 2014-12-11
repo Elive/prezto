@@ -113,7 +113,9 @@ if [[ -s /etc/elive-version ]] ; then
         fi
     else
         # if we are not via ssh, just append a space to our only-user-show var
-        _prompt_sorin_username="${_prompt_sorin_username} "
+        if [[ -n "$_prompt_sorin_username" ]] ; then
+            _prompt_sorin_username="${_prompt_sorin_username} "
+        fi
     fi
 fi
 
