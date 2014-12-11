@@ -93,20 +93,18 @@ if [[ -s /etc/elive-version ]] ; then
         # append username to prompt if we are not our own username
         if [[ "$_prompt_sorin_username" != "$USER" ]] ; then
             _prompt_sorin_username="%F{cyan}$USER"
+        else
+            unset _prompt_sorin_username
         fi
 
         # root is always red, important to see that add a space too, to show it better
         if [[ "$USER" = "root" ]] ; then
             _prompt_sorin_username="%F{red}$USER"
         fi
-    else
-        # delete variable, we dont want to use it on this cases
-        unset _prompt_sorin_username
     fi
 
     # do we are remotely connected?
-    #if [[ -n "$SSH_CLIENT" ]] || [[ "$TERM" = "screen-256color" ]] ; then
-    if [[ -n "$SSH_CLIENT" ]] ; then
+    if [[ -n "$SSH_CLIENT" ]] || [[ "$TERM" = "screen-256color" ]] ; then
         # add a : so that you can hilight and copypaste more easly the full address
         if [[ -n "$_prompt_sorin_username" ]] ; then
             _prompt_sorin_username="${_prompt_sorin_username}%F{white}@%F{green}$(hostname)%F{white}:"
