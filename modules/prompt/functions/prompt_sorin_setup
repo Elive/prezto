@@ -111,6 +111,9 @@ if [[ -s /etc/elive-version ]] ; then
         else
             _prompt_sorin_username="%F{green}$(hostname)%F{white}:"
         fi
+    else
+        # if we are not via ssh, just append a space to our only-user-show var
+        _prompt_sorin_username="${_prompt_sorin_username} "
     fi
 fi
 
