@@ -44,6 +44,7 @@ alias gbS='is_alias=1 git show-branch -a'
 # Commit (c)
 alias gc='is_alias=1 git commit --verbose'
 alias gca='is_alias=1 git commit --verbose --all'
+alias gcma='is_alias=1 git commit --all --message'
 alias gcm='is_alias=1 git commit --message'
 alias gco='is_alias=1 git checkout'
 alias gcO='is_alias=1 git checkout --patch'
