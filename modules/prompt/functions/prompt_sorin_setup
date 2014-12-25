@@ -88,6 +88,9 @@ fi
 if [[ -s /etc/elive-version ]] ; then
     # temporal variable to store the data
     _prompt_sorin_username="$( grep "^first-user: " /etc/elive-version | sed -e 's|^first-user: ||g' )"
+    if [[ -z "$_prompt_sorin_username" ]] && grep -qs "boot=live" /proc/cmdline ; then
+        _prompt_sorin_username="eliveuser"
+    fi
 
     if [[ -n "$_prompt_sorin_username" ]] ; then
         # append username to prompt if we are not our own username
@@ -96,12 +99,13 @@ if [[ -s /etc/elive-version ]] ; then
         else
             unset _prompt_sorin_username
         fi
-
-        # root is always red, important to see that add a space too, to show it better
-        if [[ "$USER" = "root" ]] ; then
-            _prompt_sorin_username="%F{red}$USER"
-        fi
     fi
+
+    # root is always red, important to see that add a space too, to show it better
+    if [[ "$USER" = "root" ]] ; then
+        _prompt_sorin_username="%F{red}$USER"
+    fi
+
 
     # do we are remotely connected?
     if [[ -n "$SSH_CLIENT" ]] || [[ "$TERM" = "screen-256color" ]] ; then
