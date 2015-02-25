@@ -163,7 +163,8 @@ zstyle ':prezto:module:terminal:tab-title' format '%s'
 # Tmux
 #
 
-# Auto start a session when Zsh is launched in a local terminal.
+# Auto start a session when Zsh is launched in a LOCAL terminal.
+# we should never want this by default
 # zstyle ':prezto:module:tmux:auto-start' local 'yes'
 
 # Auto start a session when Zsh is launched in a SSH connection.
