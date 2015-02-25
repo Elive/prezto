@@ -58,8 +58,8 @@ else
   zstyle ':prezto:module:editor:info:keymap:primary' format ' %B%F{red}❯%F{yellow}%(?::%F{red})❯%F{green}%(?::%F{red})❯%f%b'
   zstyle ':prezto:module:editor:info:keymap:primary:overwrite' format ' %F{red}♺%f'
   zstyle ':prezto:module:editor:info:keymap:alternate' format ' %B%F{green}%(?::%F{red})❮%F{yellow}%(?::%F{red})❮%F{red}❮%f%b'
-  zstyle ':prezto:module:git:info:ahead' format ' %%B%F{yellow}⇡%f%%b'
-  zstyle ':prezto:module:git:info:behind' format ' %%B%F{yellow}⇣%f%%b'
+  zstyle ':prezto:module:git:info:ahead' format ' %%B%F{yellow}⇡ ahead%f%%b'
+  zstyle ':prezto:module:git:info:behind' format ' %%B%F{yellow}⇣ behind%f%%b'
 fi
 
   # Set git-info parameters.
