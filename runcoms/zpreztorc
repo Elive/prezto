@@ -133,8 +133,7 @@ zstyle ':prezto:module:prompt' theme 'sorin'
 # By default, only the main highlighter is enabled.
 zstyle ':prezto:module:syntax-highlighting' highlighters \
   'brackets' \
-  'pattern' \
-  'root'
+  'pattern'
 #
 # Set syntax highlighting styles.
 # zstyle ':prezto:module:syntax-highlighting' styles \
