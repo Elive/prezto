@@ -52,18 +52,20 @@ if [[ $TERM != xterm-256color && $TERM != terminology && $TERM != rxvt-unicode-2
   zstyle ':prezto:module:editor:info:keymap:primary' format ' %B%F{red}>%F{yellow}%(?::%F{red})>%F{green}%(?::%F{red})>%f%b'
   zstyle ':prezto:module:editor:info:keymap:primary:overwrite' format ' %F{red}I%f'
   zstyle ':prezto:module:editor:info:keymap:alternate' format ' %B%F{green}%(?::%F{red})<%F{yellow}%(?::%F{red})<%F{red}<%f%b'
+  zstyle ':prezto:module:git:info:ahead' format ' %%B%F{yellow}ahead%f%%b'
+  zstyle ':prezto:module:git:info:behind' format ' %%B%F{yellow}behind%f%%b'
 else
   zstyle ':prezto:module:editor:info:keymap:primary' format ' %B%F{red}❯%F{yellow}%(?::%F{red})❯%F{green}%(?::%F{red})❯%f%b'
   zstyle ':prezto:module:editor:info:keymap:primary:overwrite' format ' %F{red}♺%f'
   zstyle ':prezto:module:editor:info:keymap:alternate' format ' %B%F{green}%(?::%F{red})❮%F{yellow}%(?::%F{red})❮%F{red}❮%f%b'
+  zstyle ':prezto:module:git:info:ahead' format ' %%B%F{yellow}⇡%f%%b'
+  zstyle ':prezto:module:git:info:behind' format ' %%B%F{yellow}⇣%f%%b'
 fi
 
   # Set git-info parameters.
   zstyle ':prezto:module:git:info' verbose 'yes'
   zstyle ':prezto:module:git:info:action' format ':%%B%F{yellow}%s%f%%b'
   zstyle ':prezto:module:git:info:added' format ' %%B%F{green}added%f%%b'
-  zstyle ':prezto:module:git:info:ahead' format ' %%B%F{yellow}ahead%f%%b'
-  zstyle ':prezto:module:git:info:behind' format ' %%B%F{yellow}behind%f%%b'
   zstyle ':prezto:module:git:info:branch' format ':%F{green}%b%f'
   zstyle ':prezto:module:git:info:commit' format ':%F{green}%.7c%f'
   zstyle ':prezto:module:git:info:deleted' format ' %%B%F{red}deleted%f%%b'
