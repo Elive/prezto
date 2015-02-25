@@ -54,7 +54,7 @@ zstyle ':prezto:load' pmodule \
 # Set the key mapping style to 'emacs' or 'vi'.
 zstyle ':prezto:module:editor' key-bindings 'emacs'
 
-# FIXME: use this alternataive instead?
+# elive: do not use this method, our rationalize is much better and not-buggy for: git diff master...dev
 # Auto convert .... to ../..
 # zstyle ':prezto:module:editor' dot-expansion 'yes'
 
@@ -63,7 +63,7 @@ zstyle ':prezto:module:editor' key-bindings 'emacs'
 #
 
 # Ignore submodules when they are 'dirty', 'untracked', 'all', or 'none'.
-# zstyle ':prezto:module:git:status:ignore' submodules 'all'
+ zstyle ':prezto:module:git:status:ignore' submodules 'all'
 
 #
 # GNU Utility
