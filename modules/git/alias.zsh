@@ -101,12 +101,12 @@ alias gix='is_alias=1 git rm -r --cached'
 alias giX='is_alias=1 git rm -rf --cached'
 
 # Log (l)
-alias gl='is_alias=1 git log --topo-order --pretty=format:${_git_log_medium_format}'
-alias gls='is_alias=1 git log --topo-order --stat --pretty=format:${_git_log_medium_format}'
-alias gld='is_alias=1 git log --topo-order --stat --patch --full-diff --pretty=format:${_git_log_medium_format}'
-alias glo='is_alias=1 git log --topo-order --pretty=format:${_git_log_oneline_format}'
-alias glg='is_alias=1 git log --topo-order --all --graph --pretty=format:${_git_log_oneline_format}'
-alias glb='is_alias=1 git log --topo-order --pretty=format:${_git_log_brief_format}'
+alias gl='is_alias=1 git log --topo-order --pretty=format:"${_git_log_medium_format}"'
+alias gls='is_alias=1 git log --topo-order --stat --pretty=format:"${_git_log_medium_format}"'
+alias gld='is_alias=1 git log --topo-order --stat --patch --full-diff --pretty=format:"${_git_log_medium_format}"'
+alias glo='is_alias=1 git log --topo-order --pretty=format:"${_git_log_oneline_format}"'
+alias glg='is_alias=1 git log --topo-order --all --graph --pretty=format:"${_git_log_oneline_format}"'
+alias glb='is_alias=1 git log --topo-order --pretty=format:"${_git_log_brief_format}"'
 alias glc='is_alias=1 git shortlog --summary --numbered'
 
 # Merge (m)
