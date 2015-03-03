@@ -143,17 +143,17 @@ fi
 alias df='df -k'
 alias du='du -k'
 
-if (( $+commands[htop] )); then
-  alias top=htop
-else
-  if [[ "$OSTYPE" == (darwin*|*bsd*) ]]; then
-    alias topc='top -o cpu'
-    alias topm='top -o vsize'
-  else
-    alias topc='top -o %CPU'
-    alias topm='top -o %MEM'
-  fi
-fi
+#if (( $+commands[htop] )); then
+  #alias top=htop
+#else
+  #if [[ "$OSTYPE" == (darwin*|*bsd*) ]]; then
+    #alias topc='top -o cpu'
+    #alias topm='top -o vsize'
+  #else
+    #alias topc='top -o %CPU'
+    #alias topm='top -o %MEM'
+  #fi
+#fi
 
 # Miscellaneous
 
