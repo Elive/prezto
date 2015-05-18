@@ -107,6 +107,12 @@ if [[ -s /etc/elive-version ]] ; then
     # root is always red, important to see that add a space too, to show it better
     if [[ "$USER" = "root" ]] ; then
         _prompt_sorin_username="%F{red}%n"
+
+        # chroot environment?
+        # note: we can only get the stat from root user
+        if [ "$(stat -c %d/%i /)" != "$(stat -Lc %d/%i /proc/1/root 2>/dev/null)" ]; then
+            _prompt_sorin_username="%F{cyan}(%F{green}chroot%F{cyan})"
+        fi
     fi
 
 
