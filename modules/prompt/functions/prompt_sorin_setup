@@ -37,6 +37,7 @@ function prompt_sorin_precmd {
 
 function prompt_sorin_setup {
   setopt LOCAL_OPTIONS
+  local is_chroot
   unsetopt XTRACE KSH_ARRAYS
   prompt_opts=(cr percent subst)
 
@@ -107,27 +108,52 @@ if [[ -s /etc/elive-version ]] ; then
     # root is always red, important to see that add a space too, to show it better
     if [[ "$USER" = "root" ]] ; then
         _prompt_sorin_username="%F{red}%n"
+    fi
 
-        # chroot environment?
-        # note: we can only get the stat from root user
+
+    # chroot environment?
+    if [[ "$USER" = "root" ]] ; then
         if [ "$(stat -c %d/%i /)" != "$(stat -Lc %d/%i /proc/1/root 2>/dev/null)" ]; then
-            _prompt_sorin_username="%F{cyan}(%F{green}chroot%F{cyan})"
+            is_chroot=yes
+        fi
+    else
+        # check if we are in chroot in user mode
+        if [ "$(awk '$5=="/" {print $1}' </proc/1/mountinfo)" != "$(awk '$5=="/" {print $1}' </proc/$$/mountinfo)" ] ; then
+            is_chroot=yes
         fi
     fi
 
 
-    # do we are remotely connected?
+    # show hostname too when wanted
+    # do we are remotely connected or in tmux?
     if [[ -n "$SSH_CLIENT" ]] || [[ "$TERM" = "screen-256color" ]] ; then
-        # add a : so that you can hilight and copypaste more easly the full address
-        if [[ -n "$_prompt_sorin_username" ]] ; then
-            _prompt_sorin_username="${_prompt_sorin_username}%F{white}@%F{green}%m%F{white}:"
+        if [[ "$is_chroot" = "yes" ]] ; then
+            # add a : so that you can hilight and copypaste more easly the full address
+            if [[ -n "$_prompt_sorin_username" ]] ; then
+                _prompt_sorin_username="${_prompt_sorin_username}%F{white}@%F{green}%m %F{cyan}(%F{green}chroot%F{cyan})%F{white}:"
+            else
+                _prompt_sorin_username="%F{green}%m%F{white} %F{cyan}(%F{green}chroot%F{cyan}):"
+            fi
         else
-            _prompt_sorin_username="%F{green}%m%F{white}:"
+            # add a : so that you can hilight and copypaste more easly the full address
+            if [[ -n "$_prompt_sorin_username" ]] ; then
+                _prompt_sorin_username="${_prompt_sorin_username}%F{white}@%F{green}%m%F{white}:"
+            else
+                _prompt_sorin_username="%F{green}%m%F{white}:"
+            fi
         fi
     else
         # if we are not via ssh, just append a space to our only-user-show var
-        if [[ -n "$_prompt_sorin_username" ]] ; then
-            _prompt_sorin_username="${_prompt_sorin_username} "
+        if [[ "$is_chroot" = "yes" ]] ; then
+            if [[ -n "$_prompt_sorin_username" ]] ; then
+                _prompt_sorin_username="${_prompt_sorin_username} %F{cyan}(%F{green}chroot%F{cyan}) "
+            else
+                _prompt_sorin_username="%F{cyan}(%F{green}chroot%F{cyan}) "
+            fi
+        else
+            if [[ -n "$_prompt_sorin_username" ]] ; then
+                _prompt_sorin_username="${_prompt_sorin_username} "
+            fi
         fi
     fi
 fi
