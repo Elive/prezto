@@ -49,6 +49,7 @@ function prompt_sorin_setup {
 
   # Set editor-info parameters.
   zstyle ':prezto:module:editor:info:completing' format '%B%F{red}...%f%b'
+  # note: seems like if you have LC_ALL set to C this will not work until you run a new "zsh" login, but since the bug only affects to tmux actually (shifts spaces after the >>> chars), and tmux seems like to create a new login, the problem is fixed with only this
 if [[ $TERM != xterm-256color && $TERM != terminology && $TERM != rxvt-unicode-256color && $TERM != screen-256color ]] || [[ $LC_ALL = C ]] || [[ $LANG = C ]]  ; then
   zstyle ':prezto:module:editor:info:keymap:primary' format ' %B%F{red}>%F{yellow}%(?::%F{red})>%F{green}%(?::%F{red})>%f%b'
   zstyle ':prezto:module:editor:info:keymap:primary:overwrite' format ' %F{red}I%f'
@@ -130,9 +131,9 @@ if [[ -s /etc/elive-version ]] ; then
         if [[ "$is_chroot" = "yes" ]] ; then
             # add a : so that you can hilight and copypaste more easly the full address
             if [[ -n "$_prompt_sorin_username" ]] ; then
-                _prompt_sorin_username="${_prompt_sorin_username}%F{white}@%F{green}%m %F{cyan}(%F{green}chroot%F{cyan})%F{white}:"
+                _prompt_sorin_username="${_prompt_sorin_username}%F{white}@%F{green}%m %F{cyan}[%F{green}chroot%F{cyan}]%F{white}:"
             else
-                _prompt_sorin_username="%F{green}%m%F{white} %F{cyan}(%F{green}chroot%F{cyan}):"
+                _prompt_sorin_username="%F{green}%m%F{white} %F{cyan}[%F{green}chroot%F{cyan}]:"
             fi
         else
             # add a : so that you can hilight and copypaste more easly the full address
@@ -146,9 +147,9 @@ if [[ -s /etc/elive-version ]] ; then
         # if we are not via ssh, just append a space to our only-user-show var
         if [[ "$is_chroot" = "yes" ]] ; then
             if [[ -n "$_prompt_sorin_username" ]] ; then
-                _prompt_sorin_username="${_prompt_sorin_username} %F{cyan}(%F{green}chroot%F{cyan}) "
+                _prompt_sorin_username="${_prompt_sorin_username} %F{cyan}[%F{green}chroot%F{cyan}] "
             else
-                _prompt_sorin_username="%F{cyan}(%F{green}chroot%F{cyan}) "
+                _prompt_sorin_username="%F{cyan}[%F{green}chroot%F{cyan}] "
             fi
         else
             if [[ -n "$_prompt_sorin_username" ]] ; then
