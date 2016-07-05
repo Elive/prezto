@@ -48,6 +48,13 @@ zstyle ':prezto:load' pmodule \
   #'last-working-dir' \
 
 #
+# Autosuggestions
+#
+
+# Set the query found color.
+# zstyle ':prezto:module:autosuggestions:color' found ''
+
+#
 # Editor
 #
 
