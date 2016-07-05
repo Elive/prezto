@@ -142,8 +142,9 @@ fi
 
   # Define prompts.
 #  PROMPT='${SSH_TTY:+"%F{9}%n%f%F{7}@%f%F{3}%m%f "}%F{4}${_prompt_sorin_pwd}%(!. %B%F{1}#%f%b.)${editor_info[keymap]} '
-  PROMPT='${SSH_TTY:+"%F{9}%n%f%F{7}@%f%F{2}%m%f "}%F{4}${_prompt_sorin_pwd}%(!. %B%F{1}#%f%b.)${editor_info[keymap]} '
+  #PROMPT='${SSH_TTY:+"%F{9}%n%f%F{7}@%f%F{2}%m%f "}%F{4}${_prompt_sorin_pwd}%(!. %B%F{1}#%f%b.)${editor_info[keymap]} '
 # elive prompt:
+  PROMPT='${_prompt_sorin_username}%F{6}${_prompt_sorin_pwd}%f${git_info:+${(e)git_info[prompt]}}${editor_info[keymap]} '
 #  PROMPT='${_prompt_sorin_username}%F{cyan}${_prompt_sorin_pwd}%f${git_info:+${(e)git_info[prompt]}}${editor_info[keymap]} '
   RPROMPT=''
   SPROMPT='zsh: correct %F{1}%R%f to %F{2}%r%f [nyae]? '
@@ -164,68 +165,71 @@ function prompt_sorin_preview {
 if [[ -s /etc/elive-version ]] ; then
     # temporal variable to store the data
     _prompt_sorin_username="$( grep "^first-user: " /etc/elive-version | sed -e 's|^first-user: ||g' )"
-    if [[ -z "$_prompt_sorin_username" ]] && grep -qs "boot=live" /proc/cmdline ; then
-        _prompt_sorin_username="eliveuser"
-    fi
+else
+    #_prompt_sorin_username="$USER"
+    _prompt_sorin_username="eliveuser"
+fi
+#if [[ -z "$_prompt_sorin_username" ]] && grep -qs "boot=live" /proc/cmdline ; then
+#_prompt_sorin_username="eliveuser"
+#fi
 
-    if [[ -n "$_prompt_sorin_username" ]] ; then
-        # append username to prompt if we are not our own username
-        if [[ "$_prompt_sorin_username" != "$USER" ]] ; then
-            _prompt_sorin_username="%F{cyan}%n"
+if [[ -n "$_prompt_sorin_username" ]] ; then
+    # append username to prompt if we are not our own username
+    if [[ "$_prompt_sorin_username" != "$USER" ]] ; then
+        _prompt_sorin_username="%F{6}%n"
+    else
+        unset _prompt_sorin_username
+    fi
+fi
+
+# root is always red, important to see that add a space too, to show it better
+if [[ "$USER" = "root" ]] ; then
+    _prompt_sorin_username="%F{1}%n"
+fi
+
+
+# chroot environment?
+if [[ "$USER" = "root" ]] ; then
+    if [ "$(stat -c %d/%i /)" != "$(stat -Lc %d/%i /proc/1/root 2>/dev/null)" ]; then
+        is_chroot=yes
+    fi
+else
+    # check if we are in chroot in user mode
+    if [ "$(awk '$5=="/" {print $1}' </proc/1/mountinfo)" != "$(awk '$5=="/" {print $1}' </proc/$$/mountinfo)" ] ; then
+        is_chroot=yes
+    fi
+fi
+
+
+# show hostname too when wanted
+# do we are remotely connected or in tmux?
+if [[ -n "$SSH_CLIENT" ]] || [[ "$TERM" = "screen-256color" ]] ; then
+    if [[ "$is_chroot" = "yes" ]] ; then
+        # add a : so that you can hilight and copypaste more easly the full address
+        if [[ -n "$_prompt_sorin_username" ]] ; then
+            _prompt_sorin_username="${_prompt_sorin_username}%F{7}@%F{2}%m %F{6}[%F{2}chroot%F{6}]%F{7}:"
         else
-            unset _prompt_sorin_username
-        fi
-    fi
-
-    # root is always red, important to see that add a space too, to show it better
-    if [[ "$USER" = "root" ]] ; then
-        _prompt_sorin_username="%F{red}%n"
-    fi
-
-
-    # chroot environment?
-    if [[ "$USER" = "root" ]] ; then
-        if [ "$(stat -c %d/%i /)" != "$(stat -Lc %d/%i /proc/1/root 2>/dev/null)" ]; then
-            is_chroot=yes
+            _prompt_sorin_username="%F{2}%m%F{7} %F{6}[%F{2}chroot%F{6}]:"
         fi
     else
-        # check if we are in chroot in user mode
-        if [ "$(awk '$5=="/" {print $1}' </proc/1/mountinfo)" != "$(awk '$5=="/" {print $1}' </proc/$$/mountinfo)" ] ; then
-            is_chroot=yes
+        # add a : so that you can hilight and copypaste more easly the full address
+        if [[ -n "$_prompt_sorin_username" ]] ; then
+            _prompt_sorin_username="${_prompt_sorin_username}%F{7}@%F{2}%m%F{7}:"
+        else
+            _prompt_sorin_username="%F{2}%m%F{7}:"
         fi
     fi
-
-
-    # show hostname too when wanted
-    # do we are remotely connected or in tmux?
-    if [[ -n "$SSH_CLIENT" ]] || [[ "$TERM" = "screen-256color" ]] ; then
-        if [[ "$is_chroot" = "yes" ]] ; then
-            # add a : so that you can hilight and copypaste more easly the full address
-            if [[ -n "$_prompt_sorin_username" ]] ; then
-                _prompt_sorin_username="${_prompt_sorin_username}%F{white}@%F{green}%m %F{cyan}[%F{green}chroot%F{cyan}]%F{white}:"
-            else
-                _prompt_sorin_username="%F{green}%m%F{white} %F{cyan}[%F{green}chroot%F{cyan}]:"
-            fi
+else
+    # if we are not via ssh, just append a space to our only-user-show var
+    if [[ "$is_chroot" = "yes" ]] ; then
+        if [[ -n "$_prompt_sorin_username" ]] ; then
+            _prompt_sorin_username="${_prompt_sorin_username} %F{6}[%F{2}chroot%F{6}] "
         else
-            # add a : so that you can hilight and copypaste more easly the full address
-            if [[ -n "$_prompt_sorin_username" ]] ; then
-                _prompt_sorin_username="${_prompt_sorin_username}%F{white}@%F{green}%m%F{white}:"
-            else
-                _prompt_sorin_username="%F{green}%m%F{white}:"
-            fi
+            _prompt_sorin_username="%F{6}[%F{2}chroot%F{6}] "
         fi
     else
-        # if we are not via ssh, just append a space to our only-user-show var
-        if [[ "$is_chroot" = "yes" ]] ; then
-            if [[ -n "$_prompt_sorin_username" ]] ; then
-                _prompt_sorin_username="${_prompt_sorin_username} %F{cyan}[%F{green}chroot%F{cyan}] "
-            else
-                _prompt_sorin_username="%F{cyan}[%F{green}chroot%F{cyan}] "
-            fi
-        else
-            if [[ -n "$_prompt_sorin_username" ]] ; then
-                _prompt_sorin_username="${_prompt_sorin_username} "
-            fi
+        if [[ -n "$_prompt_sorin_username" ]] ; then
+            _prompt_sorin_username="${_prompt_sorin_username} "
         fi
     fi
 fi
