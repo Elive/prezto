@@ -60,8 +60,8 @@ zstyle ':prezto:load' pmodule \
 #zstyle ':prezto:module:autosuggestions:color' found 'fg=20' # blue dark
 #zstyle ':prezto:module:autosuggestions:color' found 'fg=24' # blue nice
 #zstyle ':prezto:module:autosuggestions:color' found 'fg=63' # blue nice more visble
-#zstyle ':prezto:module:autosuggestions:color' found 'fg=244' # gray nice
-zstyle ':prezto:module:autosuggestions:color' found 'fg=103' # blue dark nice
+zstyle ':prezto:module:autosuggestions:color' found 'fg=244' # gray nice
+#zstyle ':prezto:module:autosuggestions:color' found 'fg=103' # blue dark nice
 #zstyle ':prezto:module:autosuggestions:color' found 'fg=58' # green dark not annoying
 #zstyle ':prezto:module:autosuggestions:color' found 'fg=22' # green dark not annoying darker
 #zstyle ':prezto:module:autosuggestions:color' found 'fg=64' # green dark matrix
