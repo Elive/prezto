@@ -69,7 +69,8 @@ function prompt_sorin_precmd_async {
   fi
 
   # Signal completion to parent process.
-  kill -WINCH $$
+  #kill -WINCH $$  # i don't know what is this WINCH for, it's probably -s SIGWINCH, but it makes the shell hang ! (just keep pressed your enter key for 5 seconds)
+  kill $$
 }
 
 function prompt_sorin_precmd {
