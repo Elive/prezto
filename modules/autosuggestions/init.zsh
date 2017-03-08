@@ -5,6 +5,11 @@
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
 #
 
+# disable suggestions entirely for console mode?
+#if [[ "$TERM" = linux ]] ; then
+    #return
+#fi
+
 # Load dependencies.
 pmodload 'editor'
 
@@ -23,6 +28,13 @@ zstyle -s ':prezto:module:autosuggestions:color' found \
 if ! zstyle -t ':prezto:module:autosuggestions' color; then
   ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE=''
 fi
+
+# set a specific color for console or terminal with few colors, since otherwise it will be very unreadable
+if [[ "$TERM" = linux ]] || [[ "$( tput colors 2>/dev/null )" -lt 256 ]] ; then
+    # blue
+    ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=4'
+fi
+
 
 #
 # Key Bindings
