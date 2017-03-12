@@ -50,7 +50,7 @@ function prompt_sorin_setup {
   # Set editor-info parameters.
   zstyle ':prezto:module:editor:info:completing' format '%B%F{red}...%f%b'
   # note: seems like if you have LC_ALL set to C this will not work until you run a new "zsh" login, but since the bug only affects to tmux actually (shifts spaces after the >>> chars), and tmux seems like to create a new login, the problem is fixed with only this
-if [[ $TERMINOLOGY != 1 && $TERM != terminology && $TERM != rxvt-unicode-256color && $TERM != screen-256color ]] || [[ $LC_ALL = C ]] || [[ $LANG = C ]]  ; then
+if [[ $TERM != xterm-256color && $TERMINOLOGY != 1 && $TERM != terminology && $TERM != rxvt-unicode-256color && $TERM != screen-256color ]] || [[ $LC_ALL = C ]] || [[ $LANG = C ]]  ; then
   zstyle ':prezto:module:editor:info:keymap:primary' format ' %B%F{red}>%F{yellow}%(?::%F{red})>%F{green}%(?::%F{red})>%f%b'
   zstyle ':prezto:module:editor:info:keymap:primary:overwrite' format ' %F{red}I%f'
   zstyle ':prezto:module:editor:info:keymap:alternate' format ' %B%F{green}%(?::%F{red})<%F{yellow}%(?::%F{red})<%F{red}<%f%b'
