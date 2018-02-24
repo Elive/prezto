@@ -104,7 +104,7 @@ fi
     if [[ -n "$_prompt_sorin_username" ]] ; then
         # append username to prompt if we are not our own username
         if [[ "$_prompt_sorin_username" != "$USER" ]] ; then
-            _prompt_sorin_username="%F{cyan}%n"
+            _prompt_sorin_username="%F{yellow}%n"
         else
             unset _prompt_sorin_username
         fi
