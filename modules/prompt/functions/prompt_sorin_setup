@@ -119,11 +119,13 @@ fi
     # chroot environment?
     if [[ "$USER" = "root" ]] ; then
         if [ "$(stat -c %d/%i /)" != "$(stat -Lc %d/%i /proc/1/root 2>/dev/null)" ]; then
+            chroot_arch="$( file -Lb /bin/ls | sed -e 's|^ELF ||g' -e 's| LSB.*$||g' -e 's|executable.*$||g' -e 's|-bit|B|g' )"
             is_chroot=yes
         fi
     else
         # check if we are in chroot in user mode
         if [ "$(awk '$5=="/" {print $1}' </proc/1/mountinfo)" != "$(awk '$5=="/" {print $1}' </proc/$$/mountinfo)" ] ; then
+            chroot_arch="$( file -Lb /bin/ls | sed -e 's|^ELF ||g' -e 's| LSB.*$||g' -e 's|executable.*$||g' -e 's|-bit|B|g' )"
             is_chroot=yes
         fi
     fi
@@ -135,9 +137,9 @@ fi
         if [[ "$is_chroot" = "yes" ]] ; then
             # add a : so that you can hilight and copypaste more easly the full address
             if [[ -n "$_prompt_sorin_username" ]] ; then
-                _prompt_sorin_username="${_prompt_sorin_username}%F{white}@%F{green}%m %F{cyan}[%F{green}chroot%F{cyan}]%F{white}:"
+                _prompt_sorin_username="${_prompt_sorin_username}%F{white}@%F{green}%m %F{cyan}[%F{green}chroot ${chroot_arch}%F{cyan}]%F{white}:"
             else
-                _prompt_sorin_username="%F{green}%m%F{white} %F{cyan}[%F{green}chroot%F{cyan}]:"
+                _prompt_sorin_username="%F{green}%m%F{white} %F{cyan}[%F{green}chroot ${chroot_arch}%F{cyan}]:"
             fi
         else
             # add a : so that you can hilight and copypaste more easly the full address
@@ -151,9 +153,9 @@ fi
         # if we are not via ssh, just append a space to our only-user-show var
         if [[ "$is_chroot" = "yes" ]] ; then
             if [[ -n "$_prompt_sorin_username" ]] ; then
-                _prompt_sorin_username="${_prompt_sorin_username} %F{cyan}[%F{green}chroot%F{cyan}] "
+                _prompt_sorin_username="${_prompt_sorin_username} %F{cyan}[%F{green}chroot ${chroot_arch}%F{cyan}] "
             else
-                _prompt_sorin_username="%F{cyan}[%F{green}chroot%F{cyan}] "
+                _prompt_sorin_username="%F{cyan}[%F{green}chroot ${chroot_arch}%F{cyan}] "
             fi
         else
             if [[ -n "$_prompt_sorin_username" ]] ; then
