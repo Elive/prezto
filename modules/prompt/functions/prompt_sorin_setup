@@ -164,5 +164,13 @@ fi
         fi
     fi
 
+    # if you set this variable, and run a new shell, you will have it at the first of the prompt
+    if [[ -n "$PROMPT_PREPEND" ]] ; then
+        _prompt_sorin_username="%F{green}${PROMPT_PREPEND}${_prompt_sorin_username} "
+    else
+        _prompt_sorin_username="%F{green}%(2L.%L.)${_prompt_sorin_username} "
+    fi
+
+
 
 prompt_sorin_setup "$@"
