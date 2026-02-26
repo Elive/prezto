@@ -166,7 +166,7 @@ fi
 
     # if you set this variable, and run a new shell, you will have it at the first of the prompt
     if [[ -n "$PROMPT_PREPEND" ]] ; then
-        _prompt_sorin_username="%F{green}${PROMPT_PREPEND} ${_prompt_sorin_username}"
+        _prompt_sorin_username="%F{yellow}${PROMPT_PREPEND} ${_prompt_sorin_username}"
     #else
         # update: not so useful and many times the shell is on level 2 already, like when running from ulauncher, so better to disable it
         #_prompt_sorin_username="%F{green}%(2L.%L .)${_prompt_sorin_username}"
